@@ -9,7 +9,6 @@ const { use, expect } = chai;
 
 use(chaiHttp);
 
-
 describe('Testando os endpoints da entidade `people`', function () {
     it('Testando o cadastro de uma pessoa ', async function () {
         sinon.stub(connection, 'execute').resolves([{ insertId: 42 }]);
@@ -38,7 +37,7 @@ describe('Testando os endpoints da entidade `people`', function () {
         expect(response.body).to.deep.equal(peopleList);
     });
 
-    it('Testando a listagem da pessoa com id 1', async function () {
+    it('Testando a listagem da pessoa com o ID 1', async function () {
         sinon.stub(connection, 'execute').resolves([[peopleList[0]]]);
 
         const response = await chai

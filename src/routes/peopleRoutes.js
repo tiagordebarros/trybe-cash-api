@@ -1,5 +1,5 @@
 const express = require('express');
-const { insert, findAll } = require('../db/peopleDB');
+const { insert, findAll, findById } = require('../db/peopleDB');
 
 const router = express.Router();
 
@@ -15,7 +15,13 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (_req, res) => {
-    const [result] = await findAll();
+    const result = await findAll();
+    return res.status(200).json(result);
+});
+
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
+    const [result] = await findById(id);
     return res.status(200).json(result);
 });
 
