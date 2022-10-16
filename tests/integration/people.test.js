@@ -26,19 +26,28 @@ describe('Testando os endpoints da entidade `people`', function () {
     it('Testando a listagem de todas as pessoas', async function () {
         sinon.stub(connection, 'execute').resolves([peopleList]);
 
-        console.log(await connection.execute()); // Retorna o array do mock
+        // console.log(await connection.execute()); // Retorna o array do mock
 
         const response = await chai
         .request(app)
         .get('/people');
 
-        console.log(response); // Imprime o objeto response no console
+        // console.log(response); // Imprime o objeto response no console
 
         expect(response.status).to.deep.equal(200);
         expect(response.body).to.deep.equal(peopleList);
     });
 
-    it('Testando a listagem da pessoa com id 1', async function () {});
+    it('Testando a listagem da pessoa com id 1', async function () {
+        sinon.stub(connection, 'execute').resolves([[peopleList[0]]]);
+
+        const response = await chai
+        .request(app)
+        .get('/people/1');
+
+        expect(response.status).to.deep.equal(200);
+        expect(response.body).to.deep.equal(peopleList[0]);
+    });
 
     afterEach(sinon.restore);
 });

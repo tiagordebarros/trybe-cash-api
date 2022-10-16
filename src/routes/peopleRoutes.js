@@ -1,5 +1,5 @@
 const express = require('express');
-const insert = require('../db/peopleDB');
+const { insert, findAll } = require('../db/peopleDB');
 
 const router = express.Router();
 
@@ -12,6 +12,11 @@ router.post('/', async (req, res) => {
         console.log(error);
         return res.status(500).json({ message: 'Ocorreu um erro ao cadastrar uma pessoa' });
     }
+});
+
+router.get('/', async (_req, res) => {
+    const [result] = await findAll();
+    return res.status(200).json(result);
 });
 
 module.exports = router;

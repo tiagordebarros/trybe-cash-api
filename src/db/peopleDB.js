@@ -9,4 +9,14 @@ const insert = async (person) => {
   return [{insertId}];
 };
 
-module.exports = insert;
+const findAll = async () => {
+  const [result] = await connection.execute(
+    'SELECT * FROM people',
+  );
+  return result;
+}
+
+module.exports = {
+  insert,
+  findAll,
+};
