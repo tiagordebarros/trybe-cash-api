@@ -1,10 +1,17 @@
 const express = require('express');
+const insert = require('../db/peopleDB');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const person = req.body;
-    return res.status(201).json(person);
+    try {
+        const [result] = await insert(person); // e.g. result 42 from [{insertId: 42}]
+        return res.status(201).json({ message: `Pessoa cadastrada com sucesso com o id ${result.insertId}` });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Ocorreu um erro ao cadastrar uma pessoa' });
+    }
 });
 
 module.exports = router;

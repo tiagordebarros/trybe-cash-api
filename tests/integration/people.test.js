@@ -21,4 +21,6 @@ describe('Testando os endpoints da entidade `people`', function () {
         expect(response.status).to.deep.equal(201);
         expect(response.body).to.deep.equal({ message: 'Pessoa cadastrada com sucesso com o id 42' });
     });
+
+    afterEach(sinon.restore);
 });

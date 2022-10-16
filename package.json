@@ -18,7 +18,9 @@
     "sinon": "^14.0.0"
   },
   "dependencies": {
+    "camelize": "^1.0.1",
     "express": "4.17",
-    "mysql2": "2.3"
+    "mysql2": "2.3",
+    "snakeize": "^0.1.0"
   }
 }
