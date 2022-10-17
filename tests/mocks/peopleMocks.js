@@ -5,6 +5,13 @@ const person = {
     phone: '851 678 4453',
 }
 
+const updatePerson = {
+    firstName: 'Lucão',
+    lastName: 'Andarilho dos céus',
+    email: 'lucao.andarilho@trybe.com',
+    phone: '851 678 4453',
+  }
+
 const peopleList = [
     {
       id: 1,
@@ -24,5 +31,6 @@ const peopleList = [
 
 module.exports = {
     person,
+    updatePerson,
     peopleList,
 };

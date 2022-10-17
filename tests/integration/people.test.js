@@ -3,7 +3,7 @@ const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const app = require('../../src/app');
 const connection = require('../../src/db/connection');
-const { person, peopleList } = require('../mocks/peopleMocks');
+const { person, peopleList, updatePerson } = require('../mocks/peopleMocks');
 
 const { use, expect } = chai;
 
@@ -47,6 +47,20 @@ describe('Testando os endpoints da entidade `people`', function () {
         expect(response.status).to.deep.equal(200);
         expect(response.body).to.deep.equal(peopleList[0]);
     });
+
+    it('Testando a alteração de uma pessoa com o id 1', async function () {
+        sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }])
+
+        const response = await chai
+        .request(app)
+        .put('/people/1')
+        .send(updatePerson);
+
+        expect(response.status).to.deep.equal(200);
+        expect(response.body).to.deep.equal({ message: 'Pessoa de id 1 atualizada com sucesso' });
+    });
+
+    it('Testando a exclusão da pessoa com id 1', async function () {});
 
     afterEach(sinon.restore);
 });
