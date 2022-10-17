@@ -3,8 +3,8 @@ services:
   database:
     image: mysql:8.0.29
     restart: always
-    enviroment:
+    environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: trybecashdb
     ports:
-      - '33060:3306'
+      - "33061:3306"
