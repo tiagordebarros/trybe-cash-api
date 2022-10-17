@@ -34,9 +34,18 @@ const update = async (person, id) => {
   return [result];
 };
 
+const remove = async (id) => {
+  const [result] = await connection.execute(
+    'DELETE FROM people WHERE id = ?',
+    [id],
+  );
+  return [result];
+};
+
 module.exports = {
   insert,
   findAll,
   findById,
   update,
+  remove,
 };

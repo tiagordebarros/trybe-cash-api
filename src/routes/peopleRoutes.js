@@ -1,5 +1,5 @@
 const express = require('express');
-const { insert, findAll, findById, update } = require('../db/peopleDB');
+const { insert, findAll, findById, update, remove } = require('../db/peopleDB');
 
 const router = express.Router();
 
@@ -29,8 +29,13 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const person = req.body;
     const [result] = await update(person, id);
-    console.log(result);
     if (result.affectedRows > 0) return res.status(200).json({ message: `Pessoa de id ${id} atualizada com sucesso` });
+});
+
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    const [result] = await remove(id);
+    if (result.affectedRows > 0) return res.status(200).json({ message: `Pessoa de id ${id} excluída com sucesso` });
 });
 
 module.exports = router;
