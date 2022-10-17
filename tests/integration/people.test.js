@@ -60,7 +60,16 @@ describe('Testando os endpoints da entidade `people`', function () {
         expect(response.body).to.deep.equal({ message: 'Pessoa de id 1 atualizada com sucesso' });
     });
 
-    it('Testando a exclusão da pessoa com id 1', async function () {});
+    it('Testando a exclusão da pessoa com id 1', async function () {
+        sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+        
+        const response = await chai
+        .request(app)
+        .delete('/people/1');
+        
+        expect(response.status).to.deep.equal(200);
+        expect(response.body).to.deep.equal({ message: 'Pessoa de id 1 excluída com sucesso' });
+    });
 
     afterEach(sinon.restore);
 });
