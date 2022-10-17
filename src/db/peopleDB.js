@@ -25,8 +25,18 @@ const findById = async (id) => {
   return result;
 };
 
+const update = async (person, id) => {
+  const [result] = await connection.execute(
+    `UPDATE people 
+    SET first_name = ?, last_name = ?, email = ?, phone = ? WHERE id = ?`,
+    [person.firstName, person.lastName, person.email, person.phone, id],
+  );
+  return [result];
+};
+
 module.exports = {
   insert,
   findAll,
   findById,
+  update,
 };

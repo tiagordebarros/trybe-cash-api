@@ -1,5 +1,5 @@
 const express = require('express');
-const { insert, findAll, findById } = require('../db/peopleDB');
+const { insert, findAll, findById, update } = require('../db/peopleDB');
 
 const router = express.Router();
 
@@ -23,6 +23,14 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params;
     const [result] = await findById(id);
     return res.status(200).json(result);
+});
+
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const person = req.body;
+    const [result] = await update(person, id);
+    console.log(result);
+    if (result.affectedRows > 0) return res.status(200).json({ message: `Pessoa de id ${id} atualizada com sucesso` });
 });
 
 module.exports = router;
